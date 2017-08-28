@@ -3,7 +3,6 @@ package com.everis.alicante.courses.beca.summer17.friendsnet.dao;
 import java.io.Serializable;
 
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.FNEntity;
-import com.everis.alicante.courses.beca.summer17.friendsnet.entity.Person;
 
 public interface EntityDAO<E extends FNEntity, ID extends Serializable> {
 
