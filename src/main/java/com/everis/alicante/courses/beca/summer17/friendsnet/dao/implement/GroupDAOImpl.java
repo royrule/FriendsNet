@@ -13,6 +13,6 @@ public class GroupDAOImpl extends AbstractDAO<Group, Long> implements GroupDAO {
 	@Override
 	public Group addPersons(Iterable<Person> group) {
 		return null;
-	} 
+	}
 
 }

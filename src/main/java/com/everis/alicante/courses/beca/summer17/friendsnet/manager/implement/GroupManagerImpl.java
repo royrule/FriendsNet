@@ -1,5 +1,7 @@
 package com.everis.alicante.courses.beca.summer17.friendsnet.manager.implement;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,4 +61,12 @@ public class GroupManagerImpl implements GroupManager {
 		groupdao.remove(group);
 	}
 
+	@Override
+	public Group relate(Long id, Iterable<Long> newPersonGroupsIds) {
+		Group group = groupdao.findById(id);
+		Set<Group> friends = (Set<Group>) groupdao.findByIds(newPersonGroupsIds);
+		group.getGroups().addAll(friends);
+		return group;
+
+	}
 }

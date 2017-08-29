@@ -19,4 +19,5 @@ public interface Manager <E extends FNEntity, ID extends Serializable> {
 	public Iterable<E> update(Iterable <E> es);
 
 	public void remove(E e);
+
 }

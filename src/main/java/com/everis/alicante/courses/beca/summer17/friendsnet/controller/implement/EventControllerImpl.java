@@ -15,31 +15,30 @@ import com.everis.alicante.courses.beca.summer17.friendsnet.manager.interfaces.E
 
 @RestController
 @RequestMapping("/event")
-public class EventControllerImpl implements EventController{
+public class EventControllerImpl implements EventController {
 
 	@Autowired
 	EventManager eventManager;
 
-	
 	@Override
 	@GetMapping
 	public Iterable<Event> getAll() {
 
 		return this.eventManager.findAll();
-		
+
 	}
 
 	@Override
 	@GetMapping("/{id}")
 	public Event getById(Long id) {
 
-		return eventManager.findById( id);
+		return eventManager.findById(id);
 	}
 
 	@Override
 	@PostMapping
-	public Event addPerson() {
-		// TODO Auto-generated method stub
+	public Event addPerson(Long idEvent, Long idPerson) {
+
 		return null;
 	}
 
@@ -63,6 +62,5 @@ public class EventControllerImpl implements EventController{
 
 		this.eventManager.remove(eventManager.findById(id));
 	}
-	
 
 }

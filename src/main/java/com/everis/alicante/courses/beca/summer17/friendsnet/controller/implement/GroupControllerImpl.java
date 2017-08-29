@@ -11,21 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.everis.alicante.courses.beca.summer17.friendsnet.controller.interfaces.GroupController;
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Group;
-import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Person;
 import com.everis.alicante.courses.beca.summer17.friendsnet.manager.interfaces.GroupManager;
 import com.everis.alicante.courses.beca.summer17.friendsnet.manager.interfaces.PersonManager;
 
 @RestController
 @RequestMapping("/group")
-public class GroupControllerImpl implements GroupController{
+public class GroupControllerImpl implements GroupController {
 
 	@Autowired
 	GroupManager groupManager;
-	
 
 	@Autowired
 	PersonManager personManager;
-	
+
 	@Override
 	@GetMapping
 	public Iterable<Group> getAll() {
@@ -48,13 +46,12 @@ public class GroupControllerImpl implements GroupController{
 
 	}
 
-
 	@Override
 	@DeleteMapping("/{id}")
 	public void remove(@PathVariable Long id) {
-		
+
 		this.groupManager.remove(groupManager.findById(id));
-		
+
 	}
 
 	@Override
@@ -64,11 +61,11 @@ public class GroupControllerImpl implements GroupController{
 		return null;
 	}
 
+	@Override
 	@PostMapping("/{id}/relate")
-	public Person relatePersons(@PathVariable Long id,@RequestBody Iterable<Long> newFriendsIds) {
-			
-		return this.personManager.relatePersons(id, newFriendsIds);
-		
-		}
+	public Group relate(@PathVariable Long id, @RequestBody Iterable<Long> newFriendsIds) {
+
+		return this.groupManager.relate(id, newFriendsIds);
+	}
 
 }

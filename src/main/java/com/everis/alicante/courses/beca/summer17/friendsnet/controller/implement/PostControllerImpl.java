@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.everis.alicante.courses.beca.summer17.friendsnet.controller.interfaces.PostController;
-import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Group;
-import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Person;
+import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Like;
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Post;
 import com.everis.alicante.courses.beca.summer17.friendsnet.manager.interfaces.PostManager;
 
@@ -21,9 +20,7 @@ public class PostControllerImpl implements PostController {
 
 	@Autowired
 	PostManager postManager;
-	
-	
-	
+
 	@Override
 	@GetMapping
 	public Iterable<Post> getAll() {
@@ -38,8 +35,6 @@ public class PostControllerImpl implements PostController {
 		return postManager.findById(id);
 	}
 
-	
-	
 	@Override
 	@PostMapping
 	public Post create(@RequestBody Post e) {
@@ -50,14 +45,18 @@ public class PostControllerImpl implements PostController {
 	@Override
 	@GetMapping("/person/{id}")
 	public Post getByPersonId(@PathVariable Long id) {
-	return null;
+		return null;
 	}
 
 	@Override
 	@DeleteMapping("/{id}")
-	public void remove(Long id) {		
+	public void remove(Long id) {
 		this.postManager.remove(postManager.findById(id));
 	}
-	
 
+	// add like to personId using typelike
+	@PostMapping("/{id}/person/{idPerson}/like{typeLike}/add")
+	public Like addlike(@PathVariable("id") final Long PostId, @PathVariable("idPerson") final long personId, @PathVariable("typeLike"))
+	return null;
+}
 }

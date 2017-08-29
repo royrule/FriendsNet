@@ -7,6 +7,6 @@ import com.everis.alicante.courses.beca.summer17.friendsnet.dao.interfaces.Event
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Event;
 
 @Service
-public class EventDAOImpl extends AbstractDAO<Event, Long>implements EventDAO{
+public class EventDAOImpl extends AbstractDAO<Event, Long> implements EventDAO {
 
 }

@@ -7,5 +7,7 @@ import com.everis.alicante.courses.beca.summer17.friendsnet.manager.Manager;
 public interface GroupManager extends Manager<Group, Long> {
 
 	public Group addPersons(Iterable<Person> persons);
+	
+	public Group relate(Long id, Iterable<Long> newFriendsIds);
 
 }
