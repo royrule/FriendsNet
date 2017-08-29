@@ -15,23 +15,22 @@ import com.everis.alicante.courses.beca.summer17.friendsnet.dao.interfaces.Perso
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Person;
 import com.everis.alicante.courses.beca.summer17.friendsnet.manager.implement.PersonManagerImpl;
 
-
 @RunWith(MockitoJUnitRunner.class)
 public class PersonManagerImplTest {
-
 
 	@InjectMocks
 	private PersonManagerImpl personManagerImpl;
 
 	@Mock
 	private PersonDAO personDAOMock;
-	
+
 	private Person person;
 
 	@Before
 	public void init() {
 		this.person = new Person();
 		person.setName("asd");
+		person.setId(1L);
 	}
 
 	@Test
@@ -39,25 +38,36 @@ public class PersonManagerImplTest {
 		// Arrange
 		Iterable<Person> expectPersons = new ArrayList<Person>();
 		Mockito.when(personDAOMock.findAll()).thenReturn(expectPersons);
-		
-		// Act
-		Iterable<Person> persons = personManagerImpl.findAll();
-		// Assert
-		Assert.assertEquals(expectPersons, persons);
-	}
-	
-	@Test
-	public void testFindById() {
-		// Arrange
-		Iterable<Person> expectPersons = new ArrayList<Person>();
-		Mockito.when(personDAOMock.findAll()).thenReturn(expectPersons);
-		
+
 		// Act
 		Iterable<Person> persons = personManagerImpl.findAll();
 		// Assert
 		Assert.assertEquals(expectPersons, persons);
 	}
 
+	@Test
+	public void testFindById() {
+		// Arrange
+		final Person person = new Person();
+		Mockito.when(personDAOMock.findById(1L)).thenReturn(person);
+		// Act
+		Person expectedPersonId = personManagerImpl.findById(1L);
+		// Assert
+		Assert.assertEquals(person, expectedPersonId);
+	}
+
+	// Save
+	@Test
+	public void testSave() {
+		// Arrange
+		final Person person = new Person();
+		Mockito.when(personDAOMock.save(person)).thenReturn(person);
+		// Act
+		Person createPerson = personManagerImpl.save(person);
+		// Assert
+		Assert.assertEquals(person, expectedPersonId);
+
+	}
 	// @Test
 	// public void testCreate() {
 	// // Arrange
