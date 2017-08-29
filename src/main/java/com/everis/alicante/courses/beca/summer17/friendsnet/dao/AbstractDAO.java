@@ -18,14 +18,21 @@ public abstract class AbstractDAO<E extends FNEntity, ID extends Serializable> i
 
 	private final Class<E> persistentClass;
 
+	@PersistenceContext
+	private EntityManager entityManager;
+
 	@SuppressWarnings("unchecked")
 	public AbstractDAO() {
 		this.persistentClass = (Class<E>) ((ParameterizedType) this.getClass().getGenericSuperclass())
 				.getActualTypeArguments()[0];
 	}
 
-	@PersistenceContext
-	private EntityManager entityManager;
+	@SuppressWarnings("unchecked")
+	protected AbstractDAO(EntityManager entityManager) {
+		this.persistentClass = (Class<E>) ((ParameterizedType) this.getClass().getGenericSuperclass())
+				.getActualTypeArguments()[0];
+		this.entityManager = entityManager;
+	}
 
 	public EntityManager getEntityManager() {
 		return this.entityManager;

@@ -1,44 +1,57 @@
 package com.everis.alicante.courses.beca.summer17.FriendsNet.DAOTests;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
+import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
-import com.everis.alicante.courses.beca.summer17.friendsnet.controller.interfaces.PersonController;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.everis.alicante.courses.beca.summer17.friendsnet.dao.implement.PersonDAOImpl;
+import com.everis.alicante.courses.beca.summer17.friendsnet.dao.interfaces.PersonDAO;
+import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Person;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
+@RunWith(MockitoJUnitRunner.class)
 public class PersonDAOImplTest {
+
+	private PersonDAOImpl personDAOImpl;
+
+	@Mock
+	private EntityManager entityManager;
+
+	@Before
+	public void init() {
+		this.entityManager = Mockito.mock(EntityManager.class);
+		this.personDAOImpl = new PersonDAOImpl(this.entityManager);
+	}
+
+	@Test
+	public void testFindById() {
+
+		// Arrange
+		Person expectedPerson = new Person();
+		Mockito.when(this.entityManager.find(Person.class, 1L)).thenReturn(expectedPerson);
+		// Act
+		Person person = personDAOImpl.findById(1L);
+		// Assert
+		Assert.assertEquals(expectedPerson, person);
+	}
 	
-
-	//findAll, findById, create, delete
+	// Get testCreatePerson
+	@Test
+	public void testGetCreatePerson() {
+		// Arrange
+		Person newPerson = new Person();
+		// Act
+		final Person persona = personDAOImpl.save(newPerson);
+		// Assert
+		Mockito.verify(entityManager, Mockito.times(1)).persist(newPerson);
+	}
 	
-//	Iterable<E> findAll();
-//	
-//	E findById(ID id);
-//	
-//	E save(E e);
-//	
-//	void remove (E e);
-
-	
-	@InjectMocks
-    private PersonController personController;
-
-    @Mock
-    
-    private MockMvc mockMvc;
-
-    private ObjectMapper mapper;
-
-	private PersonDAOImplTest expectedPersonDAOImpl;
-
-
-
-
-
 }

@@ -1,5 +1,8 @@
 package com.everis.alicante.courses.beca.summer17.friendsnet.controller.implement;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.everis.alicante.courses.beca.summer17.friendsnet.controller.interfaces.PostController;
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Like;
+import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Person;
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Post;
+import com.everis.alicante.courses.beca.summer17.friendsnet.entity.enums.LikeType;
 import com.everis.alicante.courses.beca.summer17.friendsnet.manager.interfaces.PostManager;
 
 @RestController
@@ -54,9 +59,11 @@ public class PostControllerImpl implements PostController {
 		this.postManager.remove(postManager.findById(id));
 	}
 
-	// add like to personId using typelike
-	@PostMapping("/{id}/person/{idPerson}/like{typeLike}/add")
-	public Like addlike(@PathVariable("id") final Long PostId, @PathVariable("idPerson") final long personId, @PathVariable("typeLike"))
-	return null;
-}
+	// add like to personId using likeType
+	@PostMapping("/{id}/person/{idPerson}/like/{likeType}/add")
+	public Like addlike(@PathVariable("id") final Long PostId, @PathVariable("idPerson") final long personId, @PathVariable("likeType") final LikeType type) {
+	List<LikeType> likes = new ArrayList<>();
+	likes.add(LikeType.PEACEIMOUT);	
+	return this.addlike(PostId, personId, type);
+	}
 }
